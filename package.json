@@ -15,25 +15,23 @@
     "@semantic-release/error": "^3.0.0",
     "aggregate-error": "^3.0.0",
     "execa": "^5.0.0",
-    "npm": "^6.4.1",
     "read-pkg": "^5.0.0"
   },
   "devDependencies": {
-    "ava": "5.1.0",
+    "ava": "5.2.0",
     "clear-module": "4.1.2",
-    "codecov": "3.8.3",
     "dockerode": "3.3.4",
     "fs-extra": "11.1.0",
     "get-stream": "6.0.1",
     "got": "11.8.6",
-    "mockserver-client": "5.14.0",
+    "mockserver-client": "5.15.0",
     "nyc": "15.1.0",
     "p-retry": "4.6.2",
-    "semantic-release": "19.0.5",
-    "sinon": "15.0.0",
+    "semantic-release": "20.1.1",
+    "sinon": "15.0.1",
     "stream-buffers": "3.0.2",
     "tempy": "1.0.1",
-    "xo": "0.50.0"
+    "xo": "0.53.1"
   },
   "engines": {
     "node": ">=14.17"
@@ -82,7 +80,6 @@
     "url": "https://github.com/ewanharris/semantic-release-pulsar.git"
   },
   "scripts": {
-    "codecov": "codecov -f coverage/coverage-final.json",
     "lint": "xo",
     "pretest": "npm run lint",
     "semantic-release": "semantic-release",
@@ -94,7 +91,8 @@
     "rules": {
       "unicorn/string-content": "off",
       "unicorn/prefer-module": "off",
-      "unicorn/no-await-expression-member": "off"
+      "unicorn/no-await-expression-member": "off",
+      "unicorn/prefer-node-protocol": "off"
     }
   }
 }
