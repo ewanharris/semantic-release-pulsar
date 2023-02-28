@@ -1,4 +1,4 @@
-# @semantic-release/apm
+# semantic-release-pulsar
 
 [**semantic-release**](https://github.com/semantic-release/semantic-release) plugin to publish [Pulsar](https://www.pulsar-edit.dev) packages.
 
@@ -29,7 +29,7 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     "@semantic-release/github",
-    "@semantic-release/apm",
+    "semantic-release-pulsar",
     "@semantic-release/git"
   ]
 }
@@ -37,7 +37,7 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
 
 ## Configuration
 
-### Apm installation
+### Pulsar installation
 
 The plugin uses the [`pulsar` CLI](https://github.com/pulsar-edit/pulsar) which has to be installed in your CI environment and available in the `PATH`.
 
