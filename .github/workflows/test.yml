@@ -2,8 +2,7 @@ name: Test
 "on":
   push:
     branches:
-      - master
-      - renovate/**
+      - main
   pull_request:
     types:
       - opened
