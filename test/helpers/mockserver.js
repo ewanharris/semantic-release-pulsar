@@ -14,7 +14,7 @@ let container;
  * Download the `mockserver` Docker image, create a new container and start it.
  */
 async function start() {
-  // await getStream(await docker.pull(IMAGE));
+  await getStream(await docker.pull(IMAGE));
 
   container = await docker.createContainer({
     Tty: true,

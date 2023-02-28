@@ -96,10 +96,5 @@
       "unicorn/prefer-module": "off",
       "unicorn/no-await-expression-member": "off"
     }
-  },
-  "renovate": {
-    "extends": [
-      "github>semantic-release/.github"
-    ]
   }
 }

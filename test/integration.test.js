@@ -17,12 +17,12 @@ const env = {
 };
 
 test.before(async (t) => {
-  t.timeout(180000);
+  t.timeout(180_000);
   await mockServer.start();
 });
 
 test.after.always(async (t) => {
-  t.timeout(60000);
+  t.timeout(60_000);
   await mockServer.stop();
 });
 
