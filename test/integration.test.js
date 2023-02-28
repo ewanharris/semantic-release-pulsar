@@ -10,17 +10,19 @@ const mockServer = require('./helpers/mockserver.js');
 
 const env = {
   GITHUB_URL: mockServer.url,
-  ATOM_ACCESS_TOKEN: 'ATOM_TOKEN',
+  PULSAR_ACCESS_TOKEN: 'ATOM_TOKEN',
   ATOM_HOME: tempy.directory(),
   ATOM_API_URL: mockServer.url,
   ATOM_RESOURCE_PATH: tempy.directory(),
 };
 
-test.before(async () => {
+test.before(async (t) => {
+  t.timeout(180000);
   await mockServer.start();
 });
 
-test.after.always(async () => {
+test.after.always(async (t) => {
+  t.timeout(60000);
   await mockServer.stop();
 });
 
@@ -43,7 +45,7 @@ test('Verify atom token, cli and package', async (t) => {
       {},
       {
         cwd,
-        env: {ATOM_ACCESS_TOKEN: 'my_token'},
+        env: {PULSAR_ACCESS_TOKEN: 'my_token'},
         options: {},
         stdout: t.context.stdout,
         stderr: t.context.stderr,
@@ -74,11 +76,11 @@ test('Throw SemanticReleaseError Array if config option are not valid in verifyC
   ];
 
   t.is(errors[0].name, 'SemanticReleaseError');
-  t.is(errors[0].code, 'ENOAPMTOKEN');
+  t.is(errors[0].code, 'ENOPPMTOKEN');
   t.truthy(errors[0].message);
   t.truthy(errors[0].details);
   t.is(errors[1].name, 'SemanticReleaseError');
-  t.is(errors[1].code, 'ENOAPMCLI');
+  t.is(errors[1].code, 'ENOPULSARCLI');
   t.truthy(errors[1].message);
   t.truthy(errors[1].details);
   t.is(errors[2].name, 'SemanticReleaseError');
@@ -96,7 +98,7 @@ test('Prepare the package', async (t) => {
     {},
     {
       cwd,
-      env: {ATOM_ACCESS_TOKEN: 'my_token'},
+      env: {PULSAR_ACCESS_TOKEN: 'my_token'},
       options: {},
       stdout: t.context.stdout,
       stderr: t.context.stderr,
@@ -132,11 +134,11 @@ test('Throw SemanticReleaseError Array if config option are not valid in prepare
   ];
 
   t.is(errors[0].name, 'SemanticReleaseError');
-  t.is(errors[0].code, 'ENOAPMTOKEN');
+  t.is(errors[0].code, 'ENOPPMTOKEN');
   t.truthy(errors[0].message);
   t.truthy(errors[0].details);
   t.is(errors[1].name, 'SemanticReleaseError');
-  t.is(errors[1].code, 'ENOAPMCLI');
+  t.is(errors[1].code, 'ENOPULSARCLI');
   t.truthy(errors[1].message);
   t.truthy(errors[1].details);
   t.is(errors[2].name, 'SemanticReleaseError');
@@ -178,7 +180,7 @@ test('Publish the package', async (t) => {
   await mockServer.verify(verifyApmMock);
   await mockServer.verify(getApmVersionMock);
 
-  t.deepEqual(result, {name: 'Atom package', url: `https://atom.io/packages/${name}`});
+  t.deepEqual(result, {name: 'Pulsar package', url: `https://web.pulsar-edit.dev/packages/${name}`});
   t.is((await readJson(path.resolve(cwd, 'package.json'))).version, '1.0.0');
 });
 
@@ -205,11 +207,11 @@ test('Throw SemanticReleaseError Array if config option are not valid in publish
   ];
 
   t.is(errors[0].name, 'SemanticReleaseError');
-  t.is(errors[0].code, 'ENOAPMTOKEN');
+  t.is(errors[0].code, 'ENOPPMTOKEN');
   t.truthy(errors[0].message);
   t.truthy(errors[0].details);
   t.is(errors[1].name, 'SemanticReleaseError');
-  t.is(errors[1].code, 'ENOAPMCLI');
+  t.is(errors[1].code, 'ENOPULSARCLI');
   t.truthy(errors[1].message);
   t.truthy(errors[1].details);
   t.is(errors[2].name, 'SemanticReleaseError');
@@ -237,7 +239,7 @@ test('Verify token and set up auth only on the fist call, then prepare on prepar
     {},
     {
       cwd,
-      env: {ATOM_ACCESS_TOKEN: 'my_token', ...env},
+      env: {PULSAR_ACCESS_TOKEN: 'my_token', ...env},
       options: {},
       stdout: t.context.stdout,
       stderr: t.context.stderr,
@@ -257,7 +259,7 @@ test('Verify token and set up auth only on the fist call, then prepare on prepar
     {},
     {
       cwd,
-      env: {ATOM_ACCESS_TOKEN: 'my_token', ...env},
+      env: {PULSAR_ACCESS_TOKEN: 'my_token', ...env},
       options: {},
       stdout: t.context.stdout,
       stderr: t.context.stderr,
@@ -269,6 +271,6 @@ test('Verify token and set up auth only on the fist call, then prepare on prepar
   await mockServer.verify(verifyApmMock);
   await mockServer.verify(getApmVersionMock);
 
-  t.deepEqual(result, {name: 'Atom package', url: `https://atom.io/packages/${name}`});
+  t.deepEqual(result, {name: 'Pulsar package', url: `https://web.pulsar-edit.dev/packages/${name}`});
   t.is((await readJson(path.resolve(cwd, 'package.json'))).version, '1.0.0');
 });

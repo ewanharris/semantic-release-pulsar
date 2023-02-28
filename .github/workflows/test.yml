@@ -18,7 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: UziTech/action-setup-atom@v1
+      - name: Setup Pulsar Editor
+        uses: pulsar-edit/action-pulsar-dependency@v3.2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -27,7 +28,7 @@ jobs:
       - run: npm ci
       - name: Ensure dependencies are compatible with the version of node
         run: npx ls-engines
-      - run: npm run test:ci
+      - run: npm run test
   test:
     runs-on: ubuntu-latest
     needs: test_matrix

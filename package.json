@@ -1,20 +1,16 @@
 {
-  "name": "@semantic-release/apm",
-  "description": "semantic-release plugin to publish Atom packages with apm",
+  "name": "semantic-release-pulsar",
+  "description": "semantic-release plugin to publish Pulsar packages",
   "version": "0.0.0-development",
-  "author": "Pierre Vanduynslager (https://twitter.com/@pvdlg_)",
+  "author": "Ewan Harris",
   "ava": {
     "files": [
       "test/**/*.test.js"
     ]
   },
   "bugs": {
-    "url": "https://github.com/semantic-release/apm/issues"
+    "url": "https://github.com/ewanharris/semantic-release-pulsar/issues"
   },
-  "contributors": [
-    "Stephan Bönnemann <stephan@boennemann.me> (http://boennemann.me)",
-    "Gregor Martynus (https://twitter.com/gr2m)"
-  ],
   "dependencies": {
     "@semantic-release/error": "^3.0.0",
     "aggregate-error": "^3.0.0",
@@ -46,11 +42,12 @@
     "lib",
     "index.js"
   ],
-  "homepage": "https://github.com/semantic-release/apm#readme",
+  "homepage": "https://github.com/ewanharris/semantic-release-pulsar#readme",
   "keywords": [
-    "apm",
-    "atom",
-    "atom-packages",
+    "ppm",
+    "pulsar",
+    "pulsar-packages",
+    "pulsar-edit",
     "publish",
     "registry",
     "semantic-release",
@@ -82,15 +79,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/semantic-release/apm.git"
+    "url": "https://github.com/ewanharris/semantic-release-pulsar.git"
   },
   "scripts": {
     "codecov": "codecov -f coverage/coverage-final.json",
     "lint": "xo",
     "pretest": "npm run lint",
     "semantic-release": "semantic-release",
-    "test": "nyc ava -v",
-    "test:ci": "nyc ava -v"
+    "test": "nyc ava -v"
   },
   "xo": {
     "prettier": true,

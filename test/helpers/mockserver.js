@@ -4,7 +4,7 @@ const got = require('got');
 const pRetry = require('p-retry');
 const {mockServerClient} = require('mockserver-client');
 
-const IMAGE = 'jamesdbloom/mockserver:latest';
+const IMAGE = 'mockserver/mockserver:latest';
 const MOCK_SERVER_PORT = 1080;
 const MOCK_SERVER_HOST = 'localhost';
 const docker = new Docker();
@@ -14,7 +14,7 @@ let container;
  * Download the `mockserver` Docker image, create a new container and start it.
  */
 async function start() {
-  await getStream(await docker.pull(IMAGE));
+  // await getStream(await docker.pull(IMAGE));
 
   container = await docker.createContainer({
     Tty: true,
@@ -39,8 +39,8 @@ async function start() {
  * Stop and remote the `mockserver` Docker container.
  */
 async function stop() {
-  await container.stop();
-  await container.remove();
+  await container?.stop();
+  await container?.remove();
 }
 
 /**

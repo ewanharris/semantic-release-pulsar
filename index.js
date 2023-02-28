@@ -2,15 +2,15 @@
 
 const AggregateError = require('aggregate-error');
 const getPkg = require('./lib/get-pkg.js');
-const verifyApm = require('./lib/verify.js');
-const prepareApm = require('./lib/prepare.js');
-const publishApm = require('./lib/publish.js');
+const verifyPulsar = require('./lib/verify.js');
+const preparePulsar = require('./lib/prepare.js');
+const publishPulsar = require('./lib/publish.js');
 
 let verified;
 let prepared;
 
 async function verifyConditions(pluginConfig, context) {
-  const errors = await verifyApm(pluginConfig, context);
+  const errors = await verifyPulsar(pluginConfig, context);
 
   try {
     await getPkg(pluginConfig, context);
@@ -26,7 +26,7 @@ async function verifyConditions(pluginConfig, context) {
 }
 
 async function prepare(pluginConfig, context) {
-  const errors = verified ? [] : await verifyApm(pluginConfig, context);
+  const errors = verified ? [] : await verifyPulsar(pluginConfig, context);
 
   try {
     await getPkg(pluginConfig, context);
@@ -38,14 +38,14 @@ async function prepare(pluginConfig, context) {
     throw new AggregateError(errors);
   }
 
-  await prepareApm(pluginConfig, context);
+  await preparePulsar(pluginConfig, context);
 
   prepared = true;
 }
 
 async function publish(pluginConfig, context) {
   let pkg;
-  const errors = verified ? [] : await verifyApm(pluginConfig, context);
+  const errors = verified ? [] : await verifyPulsar(pluginConfig, context);
 
   try {
     pkg = await getPkg(pluginConfig, context);
@@ -58,11 +58,11 @@ async function publish(pluginConfig, context) {
   }
 
   if (!prepared) {
-    await prepareApm(pluginConfig, context);
+    await preparePulsar(pluginConfig, context);
     prepared = true;
   }
 
-  return publishApm(pluginConfig, pkg, context);
+  return publishPulsar(pluginConfig, pkg, context);
 }
 
 module.exports = {verifyConditions, prepare, publish};
